@@ -1,0 +1,17 @@
+# General
+.DS_Store
+
+# Vim 
+*.swp
+Session.vim
+
+# Ag
+.ignore
+
+# Tags
+tags
+tags.loc
+*.tags
+
+
+
