@@ -1,0 +1,16 @@
+[credential]
+	helper = osxkeychain
+[user]
+	name = colinthompson
+	email = colinthompson1111@gmail.com
+[core]
+	autocrlf = input
+	excludesfile = /Users/colinthompson/.gitignore
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[merge]
+	tool = fugitive
+[init]
+	templatedir = ~/.git_template
+[alias]
+	ctags = !.git/hooks/ctags
