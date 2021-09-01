@@ -10,9 +10,6 @@ source $VIMRUNTIME/defaults.vim
 " Setting mapleader
 let mapleader = " "
 
-" Esc Mappings
-imap jk <Esc>
-
 " Indenting
 :set shiftwidth=2
 :set autoindent
@@ -164,5 +161,4 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 
 " Plug 'airblade/vim-gitgutter'
-
 set updatetime=100
