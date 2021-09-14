@@ -54,6 +54,24 @@ augroup FiletypeGroup
     au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END
 
+" Plug 'dense-analysis/ale'
+
+" Must be configured before load
+let g:ale_fix_on_save = 1 " Set this variable to 1 to fix files when you save them.
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_completion_max_suggestions = 40
+
+let g:ale_sign_error = '>'
+let g:ale_sign_warning = '-'
+
+nmap <Leader>ad <Plug>(ale_go_to_definition)
+nmap <Leader>asd <Plug>(ale_go_to_definition_in_split)
+nmap <Leader>avd <Plug>(ale_go_to_definition_in_vsplit)
+nmap <Leader>ar <Plug>(ale_find_references)
+nmap <Leader>ah <Plug>(ale_hover)
+nmap <Leader>ai <Plug>(ale_import)
+
 " ## Vundle Configuration -----------------------------------------
 
 call plug#begin('~/.vim/plugged')
@@ -84,19 +102,13 @@ call plug#end()
 
 " ## Settings for Installed Plugins -----------------------------------------
 
-" dense-analysis/ale Settings
-let g:ale_fix_on_save = 1 " Set this variable to 1 to fix files when you save them.
-let g:ale_completion_enabled = 1
-
-let g:ale_sign_error = '>'
-let g:ale_sign_warning = '-'
 
 " junegunn/fzf.vim Settings
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 nnoremap <silent> <Leader><Space> :Files<CR>
-nnoremap <silent> <leader>a :Buffers<CR>
-nnoremap <silent> <leader>A :Windows<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>B :Windows<CR>
 nnoremap <silent> <leader>; :BLines<CR>
 nnoremap <silent> <leader>o :BTags<CR>
 nnoremap <silent> <leader>O :Tags<CR>
@@ -110,6 +122,12 @@ vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
 nnoremap <silent> <leader>ft :Filetypes<CR>
+
+" Replace ctrl-x with ctrl-s
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 function! SearchWordWithAg()
   execute 'Ag' expand('<cword>')
@@ -144,12 +162,12 @@ endfunction
 
 command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 
-" tpope/vim-fugitive Settings
+" Plug 'tpope/vim-fugitive' 
 nmap <leader>gs :G<CR>
 nmap <leader>gj :diffGet //3<CR>
 nmap <leader>gh :diffGet //2<CR>
 
-" arcticicestudio/nord-vim Settings
+" 'arcticicestudio/nord-vim' 
 let g:nord_cursor_line_number_background = 1
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
