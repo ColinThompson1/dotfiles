@@ -4,6 +4,7 @@
 # Vim 
 *.swp
 Session.vim
+.projections.json
 
 # Ag
 .ignore
