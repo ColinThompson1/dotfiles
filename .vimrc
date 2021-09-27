@@ -71,6 +71,8 @@ nmap <Leader>avd <Plug>(ale_go_to_definition_in_vsplit)
 nmap <Leader>ar <Plug>(ale_find_references)
 nmap <Leader>ah <Plug>(ale_hover)
 nmap <Leader>ai <Plug>(ale_import)
+nmap <Leader>aj <Plug>(ale_next)
+nmap <Leader>ak <Plug>(ale_previous)
 
 " ## Vundle Configuration -----------------------------------------
 
@@ -93,6 +95,7 @@ Plug 'tpope/vim-obsession'
 Plug 'psliwka/vim-smoothie'
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
+Plug 'rhysd/devdocs.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips' " Snip Engine
@@ -118,8 +121,8 @@ nnoremap <silent> <leader>s :Snippets<CR>
 nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
 nnoremap <silent> <leader>. :AgIn 
 
-nnoremap <silent> K :call SearchWordWithAg()<CR>
-vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
+vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
 nnoremap <silent> <leader>ft :Filetypes<CR>
@@ -181,3 +184,7 @@ let g:airline_section_y = ''
 
 " Plug 'airblade/vim-gitgutter'
 set updatetime=100
+
+" Plug 'rhysd/devdocs.vim'
+nmap K <Plug>(devdocs-under-cursor)
+
