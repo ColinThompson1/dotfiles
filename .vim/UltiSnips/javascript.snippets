@@ -1,3 +1,6 @@
+# Override imported snippets
+priority 1
+
 snippet idl "import x from lodash/x" b
 import $1 from "lodash/$1";
 endsnippet
@@ -12,4 +15,34 @@ endsnippet
 
 snippet en "export {x} from y" b
 export {$1} from "$2";
+endsnippet
+
+snippet exc "export const x = y" b
+export const $1 = $2;
+endsnippet
+
+# Edited from 'honza/vim-snippets'
+snippet try "try { ... } catch(err) { ... }"
+	try {
+		${0:${VISUAL}}
+	} catch (${1:err}) {
+		${2:/* handle error */}
+	}
+endsnippet
+
+# EditedTaken from 'honza/vim-snippets'
+snippet tryf "try { ... } catch(err) { ... } finally { ... }"
+	try {
+		${0:${VISUAL}}
+	} catch (${1:err}) {
+		${2:/* handle error */}
+	} finally {
+		${3:/* be executed regardless of the try / catch result*/}
+	}
+endsnippet
+
+snippet freeze "export const x = Object.freeze({})" b
+export const $1 = Object.freeze({
+  $2,
+});
 endsnippet
