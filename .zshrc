@@ -173,3 +173,7 @@ function root {
 setopt extended_glob
 
 alias config='/usr/bin/git --git-dir=/Users/colinthompson/.cfg/ --work-tree=/Users/colinthompson'
+
+function open_dev_docs() {
+  open -a /Applications/DevDocs.app "devdocs-macos://search?term=$1"
+}

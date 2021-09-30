@@ -40,7 +40,7 @@ set tags=./tags;,tags; " Look up tree for tags file
 set path+=**
 
 " Mappings
-:map Y y$
+map Y y$
 
 " ## Netrw Configraution -----------------------------------------
 
@@ -95,7 +95,6 @@ Plug 'tpope/vim-obsession'
 Plug 'psliwka/vim-smoothie'
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
-Plug 'rhysd/devdocs.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips' " Snip Engine
@@ -184,7 +183,3 @@ let g:airline_section_y = ''
 
 " Plug 'airblade/vim-gitgutter'
 set updatetime=100
-
-" Plug 'rhysd/devdocs.vim'
-nmap K <Plug>(devdocs-under-cursor)
-
