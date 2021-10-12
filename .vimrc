@@ -1,185 +1,259 @@
-" ## General Settings -----------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=500
 
-" Add FZF to runtime path
-set rtp+=/usr/local/opt/fzf
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
 
-" Use vim defaults
-unlet! skip_defaults_vim
-source $VIMRUNTIME/defaults.vim
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * checktime
 
-" Setting mapleader
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
 let mapleader = " "
 
-" Indenting
-:set shiftwidth=2
-:set autoindent
-:set smartindent
-:set smarttab
+" Fast saving
+nmap <leader>w :w!<cr>
 
-" Folding
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn on the Wild menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+" Limit files searched for autocomplete (performance)
+set complete-=i 
+
+" Height of the command bar
+set cmdheight=1
+
+" A buffer becomes hidden when it is abandoned
+" set hid
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+" set hlsearch
+
+" Start searching immediately
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+" Need to use \v for 'very magic' regex
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Add a bit extra margin to the left
+" set foldcolumn=1
+
+" Set relative line numbering
+set nu rnu
+
+" Make it a bit easier to find the cursor
+set cursorline
+
+" Default fold method
 :set foldmethod=indent
 :set foldnestmax=20
 :set foldlevel=99
-
-" Perf
-:set complete-=i " Limit files searched for autocomplete
-
-" Configure Lines
-:set nu rnu
-:set cursorline
 
 " Configure Cursors 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-" Configure ctags
-set tags=./tags;,tags; " Look up tree for tags file
-
+    
 " Recursive tab completion when finding files
 set path+=**
 
 " Mappings
 map Y y$
 
-" ## Netrw Configraution -----------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
 
-" Allow netrw to remove non-empty local directories
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Disable highlight when <leader><cr> is pressed
+" map <silent> <leader><cr> :noh<cr>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Netrw
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:netrw_rmdir_cmd='rm -r'
 
-" ## File Configuration -----------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
 
-augroup FiletypeGroup
-    autocmd!
-    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-augroup END
+" Map y to copy to end of line. Similar to D
+nmap Y y$
+        
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Plug 'dense-analysis/ale'
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
 
-" Must be configured before load
-let g:ale_fix_on_save = 1 " Set this variable to 1 to fix files when you save them.
-let g:ale_completion_enabled = 1
-let g:ale_completion_autoimport = 1
-let g:ale_completion_max_suggestions = 40
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
 
-let g:ale_sign_error = '>'
-let g:ale_sign_warning = '-'
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
 
-nmap <Leader>ad <Plug>(ale_go_to_definition)
-nmap <Leader>asd <Plug>(ale_go_to_definition_in_split)
-nmap <Leader>avd <Plug>(ale_go_to_definition_in_vsplit)
-nmap <Leader>ar <Plug>(ale_find_references)
-nmap <Leader>ah <Plug>(ale_hover)
-nmap <Leader>ai <Plug>(ale_import)
-nmap <Leader>aj <Plug>(ale_next)
-nmap <Leader>ak <Plug>(ale_previous)
-
-" ## Vundle Configuration -----------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source ~/.vim/plugincfg/before.vim
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'dense-analysis/ale'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-projectionist'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-test/vim-test'
-Plug 'tpope/vim-obsession'
-Plug 'psliwka/vim-smoothie'
-Plug 'arcticicestudio/nord-vim'
-Plug 'vim-airline/vim-airline'
-
-" Snippets
-Plug 'SirVer/ultisnips' " Snip Engine
-Plug 'honza/vim-snippets' " Snippet library
+Plug 'dense-analysis/ale'
+Plug 'honza/vim-snippets'
 Plug 'joaohkfaria/vim-jest-snippets'
+Plug 'joshdick/onedark.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'psliwka/vim-smoothie'
+Plug 'sheerun/vim-polyglot'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-test/vim-test'
 
 call plug#end()
 
-" ## Settings for Installed Plugins -----------------------------------------
+source ~/.vim/plugincfg/after.vim
 
-
-" junegunn/fzf.vim Settings
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-
-nnoremap <silent> <Leader><Space> :Files<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>B :Windows<CR>
-nnoremap <silent> <leader>; :BLines<CR>
-nnoremap <silent> <leader>o :BTags<CR>
-nnoremap <silent> <leader>O :Tags<CR>
-nnoremap <silent> <leader>? :History<CR>
-nnoremap <silent> <leader>s :Snippets<CR>
-nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-nnoremap <silent> <leader>. :AgIn 
-
-nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
-vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
-nnoremap <silent> <leader>gl :Commits<CR>
-nnoremap <silent> <leader>ga :BCommits<CR>
-nnoremap <silent> <leader>ft :Filetypes<CR>
-
-" Replace ctrl-x with ctrl-s
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-function! SearchWordWithAg()
-  execute 'Ag' expand('<cword>')
-endfunction
-
-function! SearchVisualSelectionWithAg() range
-  let old_reg = getreg('"')
-  let old_regtype = getregtype('"')
-  let old_clipboard = &clipboard
-  set clipboard&
-  normal! ""gvy
-  let selection = getreg('"')
-  call setreg('"', old_reg, old_regtype)
-  let &clipboard = old_clipboard
-  execute 'Ag' selection
-endfunction
-
-" AgIn: Start ag in the specified directory
-"
-" e.g.
-"   :AgIn .. foo
-function! s:ag_in(bang, ...)
-  if !isdirectory(a:1)
-    throw 'not a valid directory: ' .. a:1
-  endif
-  " Press `?' to enable preview window.
-  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
-
-  " If you don't want preview option, use this
- " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
-endfunction
-
-command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
-
-" Plug 'tpope/vim-fugitive' 
-nmap <leader>gs :G<CR>
-nmap <leader>gj :diffGet //3<CR>
-nmap <leader>gh :diffGet //2<CR>
-
-" 'arcticicestudio/nord-vim' 
-let g:nord_cursor_line_number_background = 1
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
-
-colorscheme nord
-
-" Plug 'vim-airline/vim-airline'
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-
-" Plug 'airblade/vim-gitgutter'
-set updatetime=100
