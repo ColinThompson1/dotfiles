@@ -19,6 +19,9 @@ let mapleader = " "
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Fast exit
+nmap <leader>q :q!<cr>
+
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
@@ -149,7 +152,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>bd :bclose<cr>:tabclose<cr>gT
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
