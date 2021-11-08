@@ -1,5 +1,3 @@
-POWERLEVEL9K_MODE='nerdfont-complete'
-
 #prompt_zsh_showStatus () {
 #  state=`osascript -e 'tell application "Spotify" to player state as string'`;
 #  if [ $state = "playing" ]; then
@@ -160,16 +158,14 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-# ---- FZF
-# export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
-export FZF_DEFAULT_COMMAND='ag -g ""'
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-function root {
-   cd $(git rev-parse --show-toplevel) 
-}
 
 setopt extended_glob
 
+fpath=( ~/.zfuncs "${fpath[@]}" )
+
+autoload open_vi
+autoload root
+
 alias config='/usr/bin/git --git-dir=/Users/colinthompson/.cfg/ --work-tree=/Users/colinthompson'
+alias vi='open_vi'

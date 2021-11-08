@@ -1,0 +1,6 @@
+# Automatically use vim sessions if found 
+if [ -f "./Session.vim" ]; then
+    vim -S $@
+else 
+    vim $@
+fi
