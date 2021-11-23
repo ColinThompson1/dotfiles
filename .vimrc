@@ -17,10 +17,10 @@ au FocusGained,BufEnter * checktime
 let mapleader = " "
 
 " Fast saving
-nmap <leader>w :w!<cr>
+" nmap <leader>w :w!<cr>
 
 " Fast exit
-nmap <leader>q :q!<cr>
+" nmap <leader>q :q!<cr>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
