@@ -210,7 +210,7 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-" Greedy substitute under word
+" Greedy substitute word under cursor
 nnoremap <Leader>sg :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
