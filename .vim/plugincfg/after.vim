@@ -8,12 +8,12 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 nnoremap <silent> <Leader><Space> :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>B :Windows<CR>
-nnoremap <silent> <leader>; :BLines<CR>
-nnoremap <silent> <leader>o :BTags<CR>
-nnoremap <silent> <leader>O :Tags<CR>
+" nnoremap <silent> <leader>B :Windows<CR>
+" nnoremap <silent> <leader>; :BLines<CR>
+" nnoremap <silent> <leader>o :BTags<CR>
+" nnoremap <silent> <leader>O :Tags<CR>
 nnoremap <silent> <leader>? :History<CR>
-nnoremap <silent> <leader>s :Snippets<CR>
+" nnoremap <silent> <leader>s :Snippets<CR>
 nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
 nnoremap <silent> <leader>. :AgIn 
 
