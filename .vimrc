@@ -210,6 +210,9 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
+" Greedy substitute under word
+nnoremap <Leader>sg :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
