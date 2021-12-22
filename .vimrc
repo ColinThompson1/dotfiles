@@ -82,6 +82,7 @@ set nu rnu
 
 " Make it a bit easier to find the cursor
 set cursorline
+set cursorcolumn
 
 " Default fold method
 :set foldmethod=indent
