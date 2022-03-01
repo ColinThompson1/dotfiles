@@ -104,4 +104,14 @@ let g:airline_section_y = ''
 " => airblade/vim-gitgutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make updates more responsive
+
 set updatetime=100
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => bkad/camelcasemotion
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> ,w <Plug>CamelCaseMotion_w
+map <silent> ,b <Plug>CamelCaseMotion_b
+map <silent> ,e <Plug>CamelCaseMotion_e
