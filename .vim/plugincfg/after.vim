@@ -68,8 +68,8 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Merging shortcuts
 nmap <leader>gs :G<CR>
-nmap <leader>gj :diffGet //3<CR>
-nmap <leader>gh :diffGet //2<CR>
+nmap <leader>gl :diffget //3<CR>
+nmap <leader>gh :diffget //2<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => joshdick/onedark.vim
