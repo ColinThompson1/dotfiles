@@ -7,7 +7,7 @@
 	autocrlf = input
 	excludesfile = /Users/colinthompson/.gitignore
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [merge]
 	tool = fugitive
 [init]
