@@ -10,8 +10,6 @@
 	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [merge]
 	tool = fugitive
-[init]
-	templatedir = ~/.git_template
 [alias]
 	ctags = !.git/hooks/ctags
 [pull]
