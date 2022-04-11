@@ -90,9 +90,15 @@ set cursorcolumn
 :set foldlevel=99
 
 " Configure Cursors 
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
     
 " Recursive tab completion when finding files
 set path+=**
@@ -233,7 +239,9 @@ source ~/.vim/plugincfg/before.vim
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
+Plug 'bkad/camelcasemotion'
 Plug 'dense-analysis/ale'
 Plug 'honza/vim-snippets'
 Plug 'joaohkfaria/vim-jest-snippets'
@@ -242,7 +250,6 @@ Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'sheerun/vim-polyglot'
-Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
