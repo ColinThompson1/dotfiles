@@ -1,0 +1,16 @@
+#!/bin/sh
+
+prev=`git reflog | awk 'NR==1{ print $6; exit }' | base64`
+curr=`git reflog | awk 'NR==1{ print $8; exit }' | base64`
+
+mkdir -p ./.sessions
+
+mv Session.vim ".sessions/${prev}.vim"
+
+if [ -f ".sessions/${curr}.vim" ]
+    then
+        echo "Restoring from existing session"
+        mv ".sessions/${curr}.vim" Session.vim
+fi
+
+
