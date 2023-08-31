@@ -2,9 +2,9 @@
 " => junegunn/fzf.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://github.com/junegunn/fzf/blob/master/README-VIM.md
-set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/opt/fzf
 
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 
 nnoremap <silent> <Leader><Space> :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
@@ -63,6 +63,20 @@ endfunction
 command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 
 
+  " Default options are --nogroup --column --color
+  let s:ag_options = ' --one-device --skip-vcs-ignores --smart-case --file-search-regex spec'
+
+  command! -bang -nargs=* NoTest
+        \ call fzf#vim#ag(
+        \   <q-args>,
+        \   s:ag_options,
+        \  <bang>0 ? fzf#vim#with_preview('up:60%')
+        \        : fzf#vim#with_preview('right:50%:hidden', '?'),
+        \   <bang>0
+        \ )
+
+
+  nnoremap <leader>af :ALEFindReferences -quickfix<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tpope/vim-fugitive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,3 +129,13 @@ set updatetime=100
 map <silent> ,w <Plug>CamelCaseMotion_w
 map <silent> ,b <Plug>CamelCaseMotion_b
 map <silent> ,e <Plug>CamelCaseMotion_e
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => github/copilot
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" imap <silent><script><expr> <C-n> copilot#Accept("\<CR>")
+" let g:copilot_no_tab_map = v:true
+
+
