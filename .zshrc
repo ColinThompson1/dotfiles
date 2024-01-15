@@ -167,5 +167,6 @@ fpath=( ~/.zfuncs "${fpath[@]}" )
 autoload open_vi
 autoload root
 
+alias branch='git checkout `git branch --sort=-committerdate | FZF`'
 alias config='/usr/bin/git --git-dir=/Users/colinthompson/.cfg/ --work-tree=/Users/colinthompson'
 alias vi='open_vi'
