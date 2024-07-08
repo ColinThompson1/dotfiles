@@ -10,7 +10,7 @@ filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
-au FocusGained,BufEnter * checktime
+au FocusGained,BufEnter * silent! checktime
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -19,6 +19,9 @@ let mapleader = " "
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" Copy current buffer path to clipboard
+command CopyFileName :let @* = expand("%")
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -99,7 +102,7 @@ else
     let &t_SR = "\<Esc>]50;CursorShape=2\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-    
+
 " Recursive tab completion when finding files
 set path+=**
 
@@ -151,12 +154,6 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" Close the current buffer
-map <leader>bd :bclose<cr>:tabclose<cr>gT
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
 
 map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
@@ -218,7 +215,13 @@ if has("mac") || has("macunix")
 endif
 
 " Greedy substitute word under cursor
-nnoremap <Leader>sg :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>sg :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+vnoremap <Leader>sg "hy:%s/<C-r>h//gc<Left><Left><Left>
+
+nnoremap <Leader>sl :s/\<<C-r><C-w>\>//g<Left><Left>
+
+" Highlight code block
+nnoremap <Leader>hlb V$%
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -233,6 +236,15 @@ map <leader>sa zg
 map <leader>s? z=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => JQ
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! JQLinesToArray()
+    '<,'>!jq -R -s -c 'split("\n")[:-1]'
+endfunction
+
+command! -range=%  JQLinesToArray call JQLinesToArray()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/plugincfg/before.vim
@@ -245,7 +257,6 @@ Plug 'bkad/camelcasemotion'
 Plug 'dense-analysis/ale'
 Plug 'honza/vim-snippets'
 Plug 'joaohkfaria/vim-jest-snippets'
-Plug 'laursen/vim-react-snippets'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'psliwka/vim-smoothie'
@@ -259,8 +270,9 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'vim-test/vim-test'
+" Plug 'github/copilot.vim'
 
 call plug#end()
 
