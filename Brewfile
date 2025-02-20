@@ -1,0 +1,8 @@
+tap "homebrew/bundle"
+brew "vim"
+brew "fzf"
+brew "powerlevel10k"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+cask "iterm2"
+cask "rectangle"
