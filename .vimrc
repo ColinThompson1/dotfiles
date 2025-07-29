@@ -270,9 +270,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-" Plug 'vim-airline/vim-airline'
 Plug 'vim-test/vim-test'
-" Plug 'github/copilot.vim'
 
 call plug#end()
 
