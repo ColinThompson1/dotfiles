@@ -28,5 +28,9 @@ fi
 echo "Installing Vim plugins..."
 vim +PlugInstall +qall
 
-echo "Setup complete!"
 
+# Step 5: Installing Lanugage Servers 
+echo "Installing language servers..."
+go install golang.org/x/tools/gopls@latest
+
+echo "Setup complete!"

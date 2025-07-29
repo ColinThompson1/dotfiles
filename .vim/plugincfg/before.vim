@@ -9,6 +9,11 @@ let g:ale_completion_max_suggestions = 40
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 
+let g:ale_go_bingo_executable = 'gopls'
+let g:ale_linters = {
+  \ 'go': ['gopls'],
+  \}
+
 nmap <Leader>ad <Plug>(ale_go_to_definition)
 nmap <Leader>asd <Plug>(ale_go_to_definition_in_split)
 nmap <Leader>avd <Plug>(ale_go_to_definition_in_vsplit)
