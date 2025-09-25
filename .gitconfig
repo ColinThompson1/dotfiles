@@ -14,3 +14,5 @@
 	ctags = !.git/hooks/ctags
 [pull]
 	rebase = true
+[push]
+	autoSetupRemote = true

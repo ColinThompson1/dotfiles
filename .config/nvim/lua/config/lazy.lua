@@ -14,6 +14,22 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+-- require('telescope').setup{
+--   defaults = {
+--      vimgrep_arguments = {
+--         "ag",
+--         "--nocolor",
+--         "--noheading",
+--         "--numbers",
+--         "--column",
+--         "--smart-case",
+--         "--silent",
+--         "--vimgrep",
+--     }
+--   }
+-- }
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins

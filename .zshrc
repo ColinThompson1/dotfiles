@@ -141,3 +141,14 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 export NVM_DIR="$HOME/.nvm"
     [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
     [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+
+export PATH="$PATH:/Users/colinthompson/Library/Python/3.9/bin"
+# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# Added by Windsurf
+export PATH="/Users/colinthompson/.codeium/windsurf/bin:$PATH"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Created by `pipx` on 2025-08-29 20:11:34
+export PATH="$PATH:/Users/colinthompson/.local/bin"
